@@ -1,21 +1,22 @@
 window.addEventListener('load', () => {
 	todos = JSON.parse(localStorage.getItem('todos')); //convert string to object
- console.log(todos);
+	console.log(todos);
 	const newTodoForm = document.querySelector('#new-todo-form');//take value from form
-	const completedtask=document.getElementById("completed task");
+	
+	console.log(newTodoForm);
 
 	newTodoForm.addEventListener('submit', e => { //it works only when we submit add task
-	    e.preventDefault();
-        console.log(e);
+		e.preventDefault();
+		console.log(e);
 		const todo = {
 			content: e.target.content.value
 		}
 
-	    todos.unshift(todo);//push object to todos
+		todos.unshift(todo);//push object to todos
 		console.log(todos);
 
 		localStorage.setItem('todos', JSON.stringify(todos));//after refresh the data should not be lost //todos is an array of objects 
-	// 	// Reset the form
+		// 	// Reset the form
 		e.target.reset();
 
 		DisplayTodos();
@@ -24,7 +25,7 @@ window.addEventListener('load', () => {
 	DisplayTodos();
 })
 
-function DisplayTodos () {
+function DisplayTodos() {
 	const todoList = document.querySelector('#todo-list');
 	console.log(todoList);
 
@@ -65,13 +66,11 @@ function DisplayTodos () {
 			todoItem.classList.add('done');//line throught if completed
 		}
 
-		
 		input.addEventListener('change', (e) => { //if we want to change when edit button is clicked
 			todo.done = e.target.checked;
 			localStorage.setItem('todos', JSON.stringify(todos));
 			if (todo.done) {
 				todoItem.classList.add('done');
-
 			} else {
 				todoItem.classList.remove('done');
 			}
@@ -80,11 +79,12 @@ function DisplayTodos () {
 		})
 
 		deleteButton.addEventListener('click', (e) => {
-			todos = todos.filter(t => t != todo); 
+			todos = todos.filter(t => t != todo);
 			localStorage.setItem('todos', JSON.stringify(todos));
 			DisplayTodos()
 		})
 
 	})
 }
+
 
