@@ -151,7 +151,22 @@ input[type="checkbox"] {
 	background-color: #ff5b57;
 }
 
-.todo-item.done .todo-content input {
+.todo-item .done .todo-content input {
 	text-decoration: line-through;
 	color: darkgrey;
+}
+
+.completed-list .todo-item {
+	display: flex;
+	width: 50%;
+	align-items: center;
+	background-color: #FFF;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	margin-bottom: 1rem;
+    margin-left: 20%;
+	margin-right:20%
+
+	
 }

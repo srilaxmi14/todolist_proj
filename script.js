@@ -2,7 +2,7 @@ window.addEventListener('load', () => {
 	todos = JSON.parse(localStorage.getItem('todos')); //convert string to object
 	console.log(todos);
 	const newTodoForm = document.querySelector('#new-todo-form');//take value from form
-	
+
 	console.log(newTodoForm);
 
 	newTodoForm.addEventListener('submit', e => { //it works only when we submit add task
@@ -27,9 +27,12 @@ window.addEventListener('load', () => {
 
 function DisplayTodos() {
 	const todoList = document.querySelector('#todo-list');
+	const completed = document.querySelector('#completedtask');
 	console.log(todoList);
+	console.log(completed);
 
 	todoList.innerHTML = "";
+	completed.innerHTML = "";
 
 	todos.forEach(todo => {
 		console.log(todo);
@@ -42,11 +45,10 @@ function DisplayTodos() {
 		const span = document.createElement('span');
 		const content = document.createElement('div');
 		const actions = document.createElement('div');
-		const deleteButton = document.createElement('button');
+		const deleteButton = document.createElement('button', onclick="ConfirmDelete()");
 
 		input.type = 'checkbox';
 		input.checked = todo.done; //done is boolean value to check 
-		//span.classList.add('bubble'); //
 		content.classList.add('todo-content');
 		actions.classList.add('actions');
 		deleteButton.classList.add('delete');
@@ -64,6 +66,7 @@ function DisplayTodos() {
 
 		if (todo.done) {
 			todoItem.classList.add('done');//line throught if completed
+			completed.appendChild(todoItem);
 		}
 
 		input.addEventListener('change', (e) => { //if we want to change when edit button is clicked
@@ -79,11 +82,13 @@ function DisplayTodos() {
 		})
 
 		deleteButton.addEventListener('click', (e) => {
+			function ConfirmDelete() {
+				return confirm("Are you sure you want to delete?");
+			}
 			todos = todos.filter(t => t != todo);
 			localStorage.setItem('todos', JSON.stringify(todos));
 			DisplayTodos()
 		})
-
 	})
 }
 
