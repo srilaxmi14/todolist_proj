@@ -1,6 +1,7 @@
-window.addEventListener('load', () => {
+// window.addEventListener('load', () => {
 	todos = JSON.parse(localStorage.getItem('todos')); //convert string to object
-	console.log(todos);
+	console.log("todolist",todos);
+	
 	const newTodoForm = document.querySelector('#new-todo-form');//take value from form
 
 	console.log(newTodoForm);
@@ -10,12 +11,15 @@ window.addEventListener('load', () => {
 		console.log(e);
 		const todo = {
 			content: e.target.content.value
+	
 		}
+
+		console.log(todo);
 
 		todos.unshift(todo);//push object to todos
 		console.log(todos);
 
-		localStorage.setItem('todos', JSON.stringify(todos));//after refresh the data should not be lost //todos is an array of objects 
+		//localStorage.setItem('todos', JSON.stringify(todos));//after refresh the data should not be lost //todos is an array of objects 
 		// 	// Reset the form
 		e.target.reset();
 
@@ -23,7 +27,7 @@ window.addEventListener('load', () => {
 	})
 
 	DisplayTodos();
-})
+// })
 
 function DisplayTodos() {
 	const todoList = document.querySelector('#todo-list');
@@ -45,7 +49,7 @@ function DisplayTodos() {
 		const span = document.createElement('span');
 		const content = document.createElement('div');
 		const actions = document.createElement('div');
-		const deleteButton = document.createElement('button', onclick="ConfirmDelete()");
+		const deleteButton = document.createElement('button', onclick = "ConfirmDelete()");
 
 		input.type = 'checkbox';
 		input.checked = todo.done; //done is boolean value to check 
@@ -69,7 +73,7 @@ function DisplayTodos() {
 			completed.appendChild(todoItem);
 		}
 
-		input.addEventListener('change', (e) => { //if we want to change when edit button is clicked
+		input.addEventListener('change', (e) => { 
 			todo.done = e.target.checked;
 			localStorage.setItem('todos', JSON.stringify(todos));
 			if (todo.done) {
