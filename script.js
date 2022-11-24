@@ -2,7 +2,7 @@
 	todos = JSON.parse(localStorage.getItem('todos')); //convert string to object
 	console.log("todolist",todos);
 	
-	const newTodoForm = document.querySelector('#new-todo-form');//take value from form
+	const newTodoForm = document.querySelector('#newTodoForm');//take value from form
 
 	console.log(newTodoForm);
 
@@ -10,7 +10,8 @@
 		e.preventDefault();
 		console.log(e);
 		const todo = {
-			content: e.target.content.value
+			content: e.target.content.value,
+			done:false
 	
 		}
 
@@ -30,8 +31,8 @@
 // })
 
 function DisplayTodos() {
-	const todoList = document.querySelector('#todo-list');
-	const completed = document.querySelector('#completedtask');
+	const todoList = document.querySelector('#todoList');
+	const completed = document.querySelector('#completedTask');
 	console.log(todoList);
 	console.log(completed);
 
@@ -42,7 +43,7 @@ function DisplayTodos() {
 		console.log(todo);
 		console.log(todos);
 		const todoItem = document.createElement('div');
-		todoItem.classList.add('todo-item');
+		todoItem.classList.add('todoItem');
 
 		const label = document.createElement('label');
 		const input = document.createElement('input');
@@ -53,7 +54,7 @@ function DisplayTodos() {
 
 		input.type = 'checkbox';
 		input.checked = todo.done; //done is boolean value to check 
-		content.classList.add('todo-content');
+		content.classList.add('todoContent');
 		actions.classList.add('actions');
 		deleteButton.classList.add('delete');
 
@@ -87,6 +88,7 @@ function DisplayTodos() {
 
 		deleteButton.addEventListener('click', (e) => {
 			var userConfirm=confirm("Are you sure you want to delete this?🙄");
+			console.log(userConfirm);
 			if(userConfirm==true)
 			{
 			todos = todos.filter(t => t != todo);
