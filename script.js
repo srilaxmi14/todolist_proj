@@ -19,8 +19,8 @@
 		todos.unshift(todo);//push object to todos
 		console.log(todos);
 
-		//localStorage.setItem('todos', JSON.stringify(todos));//after refresh the data should not be lost //todos is an array of objects 
-		// 	// Reset the form
+		localStorage.setItem('todos', JSON.stringify(todos));//after refresh the data should not be lost //todos is an array of objects 
+			// Reset the form
 		e.target.reset();
 
 		DisplayTodos();
@@ -49,7 +49,7 @@ function DisplayTodos() {
 		const span = document.createElement('span');
 		const content = document.createElement('div');
 		const actions = document.createElement('div');
-		const deleteButton = document.createElement('button', onclick = "ConfirmDelete()");
+		const deleteButton = document.createElement('button');
 
 		input.type = 'checkbox';
 		input.checked = todo.done; //done is boolean value to check 
@@ -69,7 +69,7 @@ function DisplayTodos() {
 		todoList.appendChild(todoItem);
 
 		if (todo.done) {
-			todoItem.classList.add('done');//line throught if completed
+			todoItem.classList.add('done');
 			completed.appendChild(todoItem);
 		}
 
@@ -86,12 +86,13 @@ function DisplayTodos() {
 		})
 
 		deleteButton.addEventListener('click', (e) => {
-			function ConfirmDelete() {
-				return confirm("Are you sure you want to delete?");
-			}
+			var userConfirm=confirm("Are you sure you want to delete this?🙄");
+			if(userConfirm==true)
+			{
 			todos = todos.filter(t => t != todo);
 			localStorage.setItem('todos', JSON.stringify(todos));
 			DisplayTodos()
+			}
 		})
 	})
 }
